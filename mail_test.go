@@ -12,7 +12,7 @@ func Test_findRecipient(t *testing.T) {
 	prepare := func() {
 		os.Clearenv()
 		_ = os.Setenv("ALLOWED_TO", "mail@example.com,test@example.com")
-		_ = os.Setenv("DEFAULT_TO", "mail@example.com")
+		_ = os.Setenv("EMAIL_TO", "mail@example.com")
 		appConfig, _ = parseConfig()
 	}
 	t.Run("No recipient specified", func(t *testing.T) {

@@ -28,7 +28,7 @@ func Test_parseConfig(t *testing.T) {
 		os.Clearenv()
 		_ = os.Setenv("PORT", "1111")
 		_ = os.Setenv("HONEYPOTS", "pot,abc")
-		_ = os.Setenv("DEFAULT_TO", "mail@example.com")
+		_ = os.Setenv("EMAIL_TO", "mail@example.com")
 		_ = os.Setenv("ALLOWED_TO", "mail@example.com,test@example.com")
 		_ = os.Setenv("EMAIL_FROM", "forms@example.com")
 		_ = os.Setenv("SMTP_USER", "test@example.com")

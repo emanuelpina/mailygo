@@ -8,7 +8,7 @@ import (
 type config struct {
 	Port              int      `env:"PORT" envDefault:"8080"`
 	HoneyPots         []string `env:"HONEYPOTS" envDefault:"_t_email" envSeparator:","`
-	DefaultRecipient  string   `env:"DEFAULT_TO"`
+	DefaultRecipient  string   `env:"EMAIL_TO"`
 	AllowedRecipients []string `env:"ALLOWED_TO" envSeparator:","`
 	Sender            string   `env:"EMAIL_FROM"`
 	SmtpUser          string   `env:"SMTP_USER"`
