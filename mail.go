@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"net/smtp"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -29,10 +30,16 @@ func buildMessage(recipient string, date time.Time, values FormValues) string {
 	_, _ = fmt.Fprintf(&msgBuffer, "Subject: New submission on %s", findFormName(values))
 	_, _ = fmt.Fprintln(&msgBuffer)
 	_, _ = fmt.Fprintln(&msgBuffer)
-	for key, value := range removeMetaValues(values) {
+	bodyValues := removeMetaValues(values)
+	var keys []string
+	for key, _ := range bodyValues {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+	for _, key := range keys {
 		_, _ = fmt.Fprint(&msgBuffer, key)
 		_, _ = fmt.Fprint(&msgBuffer, ": ")
-		_, _ = fmt.Fprintln(&msgBuffer, strings.Join(value, ", "))
+		_, _ = fmt.Fprintln(&msgBuffer, strings.Join(bodyValues[key], ", "))
 	}
 	return msgBuffer.String()
 }
