@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/microcosm-cc/bluemonday"
+	"html"
 	"net/http"
 	"net/url"
 )
@@ -33,9 +34,9 @@ func sanitizeForm(values url.Values) FormValues {
 	for key, values := range values {
 		var sanitizedValues []string
 		for _, value := range values {
-			sanitizedValues = append(sanitizedValues, p.Sanitize(value))
+			sanitizedValues = append(sanitizedValues, html.UnescapeString(p.Sanitize(value)))
 		}
-		sanitizedForm[p.Sanitize(key)] = sanitizedValues
+		sanitizedForm[html.UnescapeString(p.Sanitize(key))] = sanitizedValues
 	}
 	return sanitizedForm
 }
