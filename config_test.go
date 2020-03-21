@@ -35,6 +35,7 @@ func Test_parseConfig(t *testing.T) {
 		_ = os.Setenv("SMTP_PASS", "secret")
 		_ = os.Setenv("SMTP_HOST", "smtp.example.com")
 		_ = os.Setenv("SMTP_PORT", "100")
+		_ = os.Setenv("GOOGLE_API_KEY", "abc")
 		cfg, err := parseConfig()
 		if err != nil {
 			t.Error()
@@ -66,6 +67,9 @@ func Test_parseConfig(t *testing.T) {
 		}
 		if !reflect.DeepEqual(cfg.SmtpPort, 100) {
 			t.Error("SMTP port is wrong")
+		}
+		if !reflect.DeepEqual(cfg.GoogleApiKey, "abc") {
+			t.Error("Google API Key is wrong")
 		}
 	})
 	t.Run("Error when wrong config", func(t *testing.T) {

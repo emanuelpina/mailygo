@@ -53,7 +53,7 @@ func isBot(values FormValues) bool {
 			}
 		}
 	}
-	return false
+	return checkValues(values)
 }
 
 func sendResponse(values FormValues, w http.ResponseWriter) {

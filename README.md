@@ -29,6 +29,7 @@ To run the server, you must set a few environment variables from the list below.
 | **`ALLOWED_TO`** | required | - | All allowed recipients (separated by `,`) |
 | **`PORT`** | optional | `8080` | The port on which the server should listen |
 | **`HONEYPORTS`** | optional | `_t_email` | Honeypot form fields (separated by `,`) |
+| **`GOOGLE_API_KEY`** | optional | - | Google API Key for the [Google Safe Browsing API](https://developers.google.com/safe-browsing/v4/) |
 
 ## Special form fields
 
@@ -42,9 +43,11 @@ You can find a sample form in the `form.html` file. Only fields whose name do no
 | **`_formName`** | optional | - | Name of the form, hidden |
 | **`_t_email`** | optional | - | (Default) "Honeypot" field, not hidden, advised (see notice below) |
 
-## Honeypot
+## Spam protection
 
 MailyGo offers the option to use a [Honeypot](https://en.wikipedia.org/wiki/Honeypot\_(computing)) field, which is basically another input, but it's hidden to the user with either a CSS rule or some JavaScript. It is very likely, that your public form will get the attention of some bots some day and then the spam starts. But bots try to fill every possible input field and will also fill the honeypot field. MailyGo won't send mails of form submissions where a honeypot field is filled. So you should definitely use it.
+
+If a Google Safe Browsing API key is set, submitted URLs will also get checked for threats.
 
 ## License
 

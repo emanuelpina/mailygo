@@ -15,6 +15,7 @@ type config struct {
 	SmtpPassword      string   `env:"SMTP_PASS"`
 	SmtpHost          string   `env:"SMTP_HOST"`
 	SmtpPort          int      `env:"SMTP_PORT" envDefault:"587"`
+	GoogleApiKey      string   `env:"GOOGLE_API_KEY"`
 }
 
 func parseConfig() (config, error) {
