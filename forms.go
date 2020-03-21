@@ -21,9 +21,11 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	_ = r.ParseForm()
 	sanitizedForm := sanitizeForm(r.PostForm)
-	if !isBot(sanitizedForm) {
-		sendForm(sanitizedForm)
-	}
+	go func() {
+		if !isBot(sanitizedForm) {
+			sendForm(sanitizedForm)
+		}
+	}()
 	sendResponse(sanitizedForm, w)
 	return
 }
