@@ -28,7 +28,7 @@ To run the server, you must set a few environment variables from the list below.
 | **`EMAIL_TO`** | required | - | Default recipient |
 | **`ALLOWED_TO`** | required | - | All allowed recipients (separated by `,`) |
 | **`PORT`** | optional | `8080` | The port on which the server should listen |
-| **`HONEYPORTS`** | optional | `_t_email` | Honeypot form fields (separated by `,`) |
+| **`HONEYPOTS`** | optional | `_t_email` | Honeypot form fields (separated by `,`) |
 | **`GOOGLE_API_KEY`** | optional | - | Google API Key for the [Google Safe Browsing API](https://developers.google.com/safe-browsing/v4/) |
 
 ## Special form fields
