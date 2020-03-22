@@ -30,6 +30,7 @@ To run the server, you must set a few environment variables from the list below.
 | **`PORT`** | optional | `8080` | The port on which the server should listen |
 | **`HONEYPOTS`** | optional | `_t_email` | Honeypot form fields (separated by `,`) |
 | **`GOOGLE_API_KEY`** | optional | - | Google API Key for the [Google Safe Browsing API](https://developers.google.com/safe-browsing/v4/) |
+| **`BLACKLIST`** | optional | `gambling,casino` | List of spam words |
 
 ## Special form fields
 

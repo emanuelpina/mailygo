@@ -9,8 +9,10 @@ import (
 // Returns true when it spam
 func checkValues(values FormValues) bool {
 	var urlsToCheck []string
+	var allValues []string
 	for _, value := range values {
 		for _, singleValue := range value {
+			allValues = append(allValues, singleValue)
 			if strings.Contains(singleValue, "http") {
 				parsed, e := url.Parse(singleValue)
 				if parsed != nil && e == nil {
@@ -19,7 +21,19 @@ func checkValues(values FormValues) bool {
 			}
 		}
 	}
-	return checkUrls(urlsToCheck)
+	return checkBlacklist(allValues) || checkUrls(urlsToCheck)
+}
+
+func checkBlacklist(values []string) bool {
+	for _, value := range values {
+		for _, blacklistedString := range appConfig.Blacklist {
+			if strings.Contains(strings.ToLower(value), strings.ToLower(blacklistedString)) {
+				return true
+			}
+		}
+
+	}
+	return false
 }
 
 // Only tests when GOOGLE_API_KEY is set
