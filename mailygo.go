@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-var appConfig config
+var appConfig *config
 
 func init() {
 	cfg, err := parseConfig()

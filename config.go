@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+
 	"github.com/caarlos0/env/v6"
 )
 
@@ -19,15 +20,15 @@ type config struct {
 	Blacklist         []string `env:"BLACKLIST" envSeparator:"," envDefault:"gambling,casino"`
 }
 
-func parseConfig() (config, error) {
-	cfg := config{}
-	if err := env.Parse(&cfg); err != nil {
+func parseConfig() (*config, error) {
+	cfg := &config{}
+	if err := env.Parse(cfg); err != nil {
 		return cfg, errors.New("failed to parse config")
 	}
 	return cfg, nil
 }
 
-func checkRequiredConfig(cfg config) bool {
+func checkRequiredConfig(cfg *config) bool {
 	if cfg.DefaultRecipient == "" {
 		return false
 	}

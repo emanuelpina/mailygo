@@ -1,16 +1,17 @@
 package main
 
 import (
-	"github.com/google/safebrowsing"
 	"net/url"
 	"strings"
+
+	"github.com/google/safebrowsing"
 )
 
 // Returns true when it spam
-func checkValues(values FormValues) bool {
+func checkValues(values *FormValues) bool {
 	var urlsToCheck []string
 	var allValues []string
-	for _, value := range values {
+	for _, value := range *values {
 		for _, singleValue := range value {
 			allValues = append(allValues, singleValue)
 			if strings.Contains(singleValue, "http") {
@@ -21,11 +22,11 @@ func checkValues(values FormValues) bool {
 			}
 		}
 	}
-	return checkBlacklist(allValues) || checkUrls(urlsToCheck)
+	return checkBlacklist(&allValues) || checkUrls(&urlsToCheck)
 }
 
-func checkBlacklist(values []string) bool {
-	for _, value := range values {
+func checkBlacklist(values *[]string) bool {
+	for _, value := range *values {
 		for _, blacklistedString := range appConfig.Blacklist {
 			if strings.Contains(strings.ToLower(value), strings.ToLower(blacklistedString)) {
 				return true
@@ -38,8 +39,8 @@ func checkBlacklist(values []string) bool {
 
 // Only tests when GOOGLE_API_KEY is set
 // Returns true when it spam
-func checkUrls(urlsToCheck []string) bool {
-	if len(appConfig.GoogleApiKey) < 1 || len(urlsToCheck) == 0 {
+func checkUrls(urlsToCheck *[]string) bool {
+	if len(appConfig.GoogleApiKey) < 1 || len(*urlsToCheck) == 0 {
 		return false
 	}
 	sb, err := safebrowsing.NewSafeBrowser(safebrowsing.Config{
@@ -49,7 +50,7 @@ func checkUrls(urlsToCheck []string) bool {
 	if err != nil {
 		return false
 	}
-	allThreats, err := sb.LookupURLs(urlsToCheck)
+	allThreats, err := sb.LookupURLs(*urlsToCheck)
 	if err != nil {
 		return false
 	}

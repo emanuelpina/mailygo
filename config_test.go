@@ -90,7 +90,7 @@ func Test_parseConfig(t *testing.T) {
 }
 
 func Test_checkRequiredConfig(t *testing.T) {
-	validConfig := config{
+	validConfig := &config{
 		Port:              8080,
 		HoneyPots:         []string{"_t_email"},
 		DefaultRecipient:  "mail@example.com",
@@ -107,44 +107,44 @@ func Test_checkRequiredConfig(t *testing.T) {
 		}
 	})
 	t.Run("Default recipient missing", func(t *testing.T) {
-		newConfig := validConfig
+		newConfig := *validConfig
 		newConfig.DefaultRecipient = ""
-		if false != checkRequiredConfig(newConfig) {
+		if false != checkRequiredConfig(&newConfig) {
 			t.Error()
 		}
 	})
 	t.Run("Allowed recipients missing", func(t *testing.T) {
-		newConfig := validConfig
+		newConfig := *validConfig
 		newConfig.AllowedRecipients = nil
-		if false != checkRequiredConfig(newConfig) {
+		if false != checkRequiredConfig(&newConfig) {
 			t.Error()
 		}
 	})
 	t.Run("Sender missing", func(t *testing.T) {
-		newConfig := validConfig
+		newConfig := *validConfig
 		newConfig.Sender = ""
-		if false != checkRequiredConfig(newConfig) {
+		if false != checkRequiredConfig(&newConfig) {
 			t.Error()
 		}
 	})
 	t.Run("SMTP user missing", func(t *testing.T) {
-		newConfig := validConfig
+		newConfig := *validConfig
 		newConfig.SmtpUser = ""
-		if false != checkRequiredConfig(newConfig) {
+		if false != checkRequiredConfig(&newConfig) {
 			t.Error()
 		}
 	})
 	t.Run("SMTP password missing", func(t *testing.T) {
-		newConfig := validConfig
+		newConfig := *validConfig
 		newConfig.SmtpPassword = ""
-		if false != checkRequiredConfig(newConfig) {
+		if false != checkRequiredConfig(&newConfig) {
 			t.Error()
 		}
 	})
 	t.Run("SMTP host missing", func(t *testing.T) {
-		newConfig := validConfig
+		newConfig := *validConfig
 		newConfig.SmtpHost = ""
-		if false != checkRequiredConfig(newConfig) {
+		if false != checkRequiredConfig(&newConfig) {
 			t.Error()
 		}
 	})

@@ -10,12 +10,12 @@ import (
 	"time"
 )
 
-func sendForm(values FormValues) {
+func sendForm(values *FormValues) {
 	recipient := findRecipient(values)
 	sendMail(recipient, buildMessage(recipient, time.Now(), values))
 }
 
-func buildMessage(recipient string, date time.Time, values FormValues) string {
+func buildMessage(recipient string, date time.Time, values *FormValues) string {
 	var msgBuffer bytes.Buffer
 	_, _ = fmt.Fprintf(&msgBuffer, "From: Forms <%s>", appConfig.Sender)
 	_, _ = fmt.Fprintln(&msgBuffer)
@@ -32,14 +32,14 @@ func buildMessage(recipient string, date time.Time, values FormValues) string {
 	_, _ = fmt.Fprintln(&msgBuffer)
 	bodyValues := removeMetaValues(values)
 	var keys []string
-	for key, _ := range bodyValues {
+	for key := range *bodyValues {
 		keys = append(keys, key)
 	}
 	sort.Strings(keys)
 	for _, key := range keys {
 		_, _ = fmt.Fprint(&msgBuffer, key)
 		_, _ = fmt.Fprint(&msgBuffer, ": ")
-		_, _ = fmt.Fprintln(&msgBuffer, strings.Join(bodyValues[key], ", "))
+		_, _ = fmt.Fprintln(&msgBuffer, strings.Join((*bodyValues)[key], ", "))
 	}
 	return msgBuffer.String()
 }
@@ -52,9 +52,9 @@ func sendMail(to, message string) {
 	}
 }
 
-func findRecipient(values FormValues) string {
-	if len(values["_to"]) == 1 && values["_to"][0] != "" {
-		formDefinedRecipient := values["_to"][0]
+func findRecipient(values *FormValues) string {
+	if len((*values)["_to"]) == 1 && (*values)["_to"][0] != "" {
+		formDefinedRecipient := (*values)["_to"][0]
 		for _, allowed := range appConfig.AllowedRecipients {
 			if formDefinedRecipient == allowed {
 				return formDefinedRecipient
@@ -64,26 +64,26 @@ func findRecipient(values FormValues) string {
 	return appConfig.DefaultRecipient
 }
 
-func findFormName(values FormValues) string {
-	if len(values["_formName"]) == 1 && values["_formName"][0] != "" {
-		return values["_formName"][0]
+func findFormName(values *FormValues) string {
+	if len((*values)["_formName"]) == 1 && (*values)["_formName"][0] != "" {
+		return (*values)["_formName"][0]
 	}
 	return "a form"
 }
 
-func findReplyTo(values FormValues) string {
-	if len(values["_replyTo"]) == 1 && values["_replyTo"][0] != "" {
-		return values["_replyTo"][0]
+func findReplyTo(values *FormValues) string {
+	if len((*values)["_replyTo"]) == 1 && (*values)["_replyTo"][0] != "" {
+		return (*values)["_replyTo"][0]
 	}
 	return ""
 }
 
-func removeMetaValues(values FormValues) FormValues {
+func removeMetaValues(values *FormValues) *FormValues {
 	cleanedValues := FormValues{}
-	for key, value := range values {
+	for key, value := range *values {
 		if !strings.HasPrefix(key, "_") {
 			cleanedValues[key] = value
 		}
 	}
-	return cleanedValues
+	return &cleanedValues
 }

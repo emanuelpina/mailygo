@@ -11,9 +11,9 @@ import (
 
 func Test_sanitizeForm(t *testing.T) {
 	t.Run("Sanitize form", func(t *testing.T) {
-		result := sanitizeForm(url.Values{"<b>Test</b>": {"<a href=\"https://example.com\">Test</a>"}})
+		result := sanitizeForm(&url.Values{"<b>Test</b>": {"<a href=\"https://example.com\">Test</a>"}})
 		want := FormValues{"Test": {"Test"}}
-		if !reflect.DeepEqual(result, want) {
+		if !reflect.DeepEqual(*result, want) {
 			t.Error()
 		}
 	})
@@ -52,21 +52,21 @@ func TestFormHandler(t *testing.T) {
 func Test_isBot(t *testing.T) {
 	t.Run("No bot", func(t *testing.T) {
 		os.Clearenv()
-		result := isBot(FormValues{"_t_email": {""}})
+		result := isBot(&FormValues{"_t_email": {""}})
 		if !reflect.DeepEqual(result, false) {
 			t.Error()
 		}
 	})
 	t.Run("No honeypot", func(t *testing.T) {
 		os.Clearenv()
-		result := isBot(FormValues{})
+		result := isBot(&FormValues{})
 		if !reflect.DeepEqual(result, false) {
 			t.Error()
 		}
 	})
 	t.Run("Bot", func(t *testing.T) {
 		os.Clearenv()
-		result := isBot(FormValues{"_t_email": {"Test", ""}})
+		result := isBot(&FormValues{"_t_email": {"Test", ""}})
 		if !reflect.DeepEqual(result, true) {
 			t.Error()
 		}
@@ -75,7 +75,7 @@ func Test_isBot(t *testing.T) {
 
 func Test_sendResponse(t *testing.T) {
 	t.Run("No redirect", func(t *testing.T) {
-		values := FormValues{}
+		values := &FormValues{}
 		w := httptest.NewRecorder()
 		sendResponse(values, w)
 		if w.Code != http.StatusCreated {
@@ -83,7 +83,7 @@ func Test_sendResponse(t *testing.T) {
 		}
 	})
 	t.Run("No redirect 2", func(t *testing.T) {
-		values := FormValues{
+		values := &FormValues{
 			"_redirectTo": {""},
 		}
 		w := httptest.NewRecorder()
@@ -93,7 +93,7 @@ func Test_sendResponse(t *testing.T) {
 		}
 	})
 	t.Run("No redirect 3", func(t *testing.T) {
-		values := FormValues{
+		values := &FormValues{
 			"_redirectTo": {"abc", "def"},
 		}
 		w := httptest.NewRecorder()
@@ -103,7 +103,7 @@ func Test_sendResponse(t *testing.T) {
 		}
 	})
 	t.Run("Redirect", func(t *testing.T) {
-		values := FormValues{
+		values := &FormValues{
 			"_redirectTo": {"https://example.com"},
 		}
 		w := httptest.NewRecorder()
