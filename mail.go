@@ -16,20 +16,20 @@ func sendForm(values *FormValues) {
 }
 
 func buildMessage(recipient string, date time.Time, values *FormValues) string {
-	var msgBuffer bytes.Buffer
-	_, _ = fmt.Fprintf(&msgBuffer, "From: Forms <%s>", appConfig.Sender)
-	_, _ = fmt.Fprintln(&msgBuffer)
-	_, _ = fmt.Fprintf(&msgBuffer, "To: %s", recipient)
-	_, _ = fmt.Fprintln(&msgBuffer)
+	msgBuffer := &bytes.Buffer{}
+	_, _ = fmt.Fprintf(msgBuffer, "From: Forms <%s>", appConfig.Sender)
+	_, _ = fmt.Fprintln(msgBuffer)
+	_, _ = fmt.Fprintf(msgBuffer, "To: %s", recipient)
+	_, _ = fmt.Fprintln(msgBuffer)
 	if replyTo := findReplyTo(values); replyTo != "" {
-		_, _ = fmt.Fprintf(&msgBuffer, "Reply-To: %s", replyTo)
-		_, _ = fmt.Fprintln(&msgBuffer)
+		_, _ = fmt.Fprintf(msgBuffer, "Reply-To: %s", replyTo)
+		_, _ = fmt.Fprintln(msgBuffer)
 	}
-	_, _ = fmt.Fprintf(&msgBuffer, "Date: %s", date.Format(time.RFC1123Z))
-	_, _ = fmt.Fprintln(&msgBuffer)
-	_, _ = fmt.Fprintf(&msgBuffer, "Subject: New submission on %s", findFormName(values))
-	_, _ = fmt.Fprintln(&msgBuffer)
-	_, _ = fmt.Fprintln(&msgBuffer)
+	_, _ = fmt.Fprintf(msgBuffer, "Date: %s", date.Format(time.RFC1123Z))
+	_, _ = fmt.Fprintln(msgBuffer)
+	_, _ = fmt.Fprintf(msgBuffer, "Subject: New submission on %s", findFormName(values))
+	_, _ = fmt.Fprintln(msgBuffer)
+	_, _ = fmt.Fprintln(msgBuffer)
 	bodyValues := removeMetaValues(values)
 	var keys []string
 	for key := range *bodyValues {
@@ -37,9 +37,9 @@ func buildMessage(recipient string, date time.Time, values *FormValues) string {
 	}
 	sort.Strings(keys)
 	for _, key := range keys {
-		_, _ = fmt.Fprint(&msgBuffer, key)
-		_, _ = fmt.Fprint(&msgBuffer, ": ")
-		_, _ = fmt.Fprintln(&msgBuffer, strings.Join((*bodyValues)[key], ", "))
+		_, _ = fmt.Fprint(msgBuffer, key)
+		_, _ = fmt.Fprint(msgBuffer, ": ")
+		_, _ = fmt.Fprintln(msgBuffer, strings.Join((*bodyValues)[key], ", "))
 	}
 	return msgBuffer.String()
 }

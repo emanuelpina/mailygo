@@ -13,13 +13,13 @@ func Test_checkBlacklist(t *testing.T) {
 	}
 	t.Run("Allowed values", func(t *testing.T) {
 		prepare()
-		if checkBlacklist(&[]string{"Hello", "How are you?"}) == true {
+		if checkBlacklist([]string{"Hello", "How are you?"}) == true {
 			t.Error()
 		}
 	})
 	t.Run("Forbidden values", func(t *testing.T) {
 		prepare()
-		if checkBlacklist(&[]string{"How are you?", "Hello TeSt1"}) == false {
+		if checkBlacklist([]string{"How are you?", "Hello TeSt1"}) == false {
 			t.Error()
 		}
 	})
