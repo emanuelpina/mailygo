@@ -1,6 +1,8 @@
 FROM golang:1.14-alpine as build
+RUN apk add --no-cache gcc musl-dev tzdata
 ADD . /app
 WORKDIR /app
+RUN go test
 RUN go build
 
 FROM alpine:3.11
