@@ -9,7 +9,7 @@ MailyGo is lean and resource-saving. It can be installed with just one executabl
 MailyGo can be compiled with the following command:
 
 ```bash
-go get -u codeberg.org/jlelse/mailygo
+go get -u codeberg.org/emanuelpina/mailygo
 ```
 
 It can then be executed directly.
