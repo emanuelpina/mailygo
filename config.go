@@ -20,6 +20,7 @@ type config struct {
 	Blacklist         []string `env:"BLACKLIST" envSeparator:"," envDefault:"gambling,casino"`
 	MessageHeader     string   `env:"MESSAGE_HEADER"`
 	MessageFooter     string   `env:"MESSAGE_FOOTER"`
+	MessageSubmitter  string   `env:"MESSAGE_SUBMITTER" envDefault:"false"`
 }
 
 func parseConfig() (*config, error) {
