@@ -70,6 +70,11 @@ func buildSubmitterMessage(recipient string, date time.Time, values *FormValues)
 	_, _ = fmt.Fprintf(msgBuffer, "Subject: Your submission on %s", findFormName(values))
 	_, _ = fmt.Fprintln(msgBuffer)
 	_, _ = fmt.Fprintln(msgBuffer)
+	if messageSubmitterHeader := appConfig.MessageSubmitterHeader; messageSubmitterHeader != "" {
+		_, _ = fmt.Fprintf(msgBuffer, "%s", messageSubmitterHeader)
+		_, _ = fmt.Fprintln(msgBuffer)
+		_, _ = fmt.Fprintln(msgBuffer)
+	}
 	bodyValues := removeMetaValues(values)
 	var keys []string
 	for key := range *bodyValues {
@@ -80,6 +85,10 @@ func buildSubmitterMessage(recipient string, date time.Time, values *FormValues)
 		_, _ = fmt.Fprint(msgBuffer, key)
 		_, _ = fmt.Fprint(msgBuffer, ": ")
 		_, _ = fmt.Fprintln(msgBuffer, strings.Join((*bodyValues)[key], ", "))
+	}
+	if messageSubmitterFooter := appConfig.MessageSubmitterFooter; messageSubmitterFooter != "" {
+		_, _ = fmt.Fprintln(msgBuffer)
+		_, _ = fmt.Fprintf(msgBuffer, "%s", messageSubmitterFooter)
 	}
 	return msgBuffer.String()
 }

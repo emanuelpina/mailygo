@@ -34,6 +34,8 @@ To run the server, you must set a few environment variables from the list below.
 | **`MESSAGE_HEADER`** | optional | - | Text to appear at the beginning of the email message, before the list of fields |
 | **`MESSAGE_FOOTER`** | optional | - | Text to appear at the end of the email message, after the list of fields |
 | **`MESSAGE_SUBMITTER`** | optional | `false` | If set to `true` and the form submitter provide an email address, a copy of the message is send to him |
+| **`MESSAGE_SUBMITTER_HEADER`** | optional | - | Text to appear at the beginning of the email message send to submitter, before the list of fields |
+| **`MESSAGE_SUBMITTER_FOOTER`** | optional | - | Text to appear at the end of the email message send to submitter, after the list of fields |
 
 ## Special form fields
 
