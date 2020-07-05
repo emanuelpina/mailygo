@@ -18,6 +18,8 @@ type config struct {
 	SmtpPort          int      `env:"SMTP_PORT" envDefault:"587"`
 	GoogleApiKey      string   `env:"GOOGLE_API_KEY"`
 	Blacklist         []string `env:"BLACKLIST" envSeparator:"," envDefault:"gambling,casino"`
+	MessageHeader     string   `env:"MESSAGE_HEADER"`
+	MessageFooter     string   `env:"MESSAGE_FOOTER"`
 }
 
 func parseConfig() (*config, error) {

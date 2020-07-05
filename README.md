@@ -31,6 +31,8 @@ To run the server, you must set a few environment variables from the list below.
 | **`HONEYPOTS`** | optional | `_t_email` | Honeypot form fields (separated by `,`) |
 | **`GOOGLE_API_KEY`** | optional | - | Google API Key for the [Google Safe Browsing API](https://developers.google.com/safe-browsing/v4/) |
 | **`BLACKLIST`** | optional | `gambling,casino` | List of spam words |
+| **`MESSAGE_HEADER`** | optional | - | Text to appear at the beginning of the email message, before the list of fields |
+| **`MESSAGE_FOOTER`** | optional | - | Text to appear at the end of the email message, after the list of fields |
 
 ## Special form fields
 
