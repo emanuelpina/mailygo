@@ -50,6 +50,7 @@ func buildMessage(recipient string, date time.Time, values *FormValues) string {
 	if message := findMessage(values); message != "" {
 		_, _ = fmt.Fprintf(msgBuffer, "Message:\r\n%s", message)
 		_, _ = fmt.Fprintln(msgBuffer)
+		_, _ = fmt.Fprintln(msgBuffer)
 	}
 	bodyValues := removeMetaValues(values)
 	var keys []string
@@ -97,6 +98,7 @@ func buildSubmitterMessage(recipient string, date time.Time, values *FormValues)
 	}
 	if message := findMessage(values); message != "" {
 		_, _ = fmt.Fprintf(msgBuffer, "Message:\r\n%s", message)
+		_, _ = fmt.Fprintln(msgBuffer)
 		_, _ = fmt.Fprintln(msgBuffer)
 	}
 	bodyValues := removeMetaValues(values)
