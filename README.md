@@ -61,7 +61,7 @@ As I'm using MailyGo to handle a contact form and I want the fields Name, Subjec
 
 MailyGo offers the option to use a [Honeypot](https://en.wikipedia.org/wiki/Honeypot\_(computing)) field, which is basically another input, but it's hidden to the user with either a CSS rule or some JavaScript. It is very likely, that your public form will get the attention of some bots some day and then the spam starts. But bots try to fill every possible input field and will also fill the honeypot field. MailyGo won't send mails of form submissions where a honeypot field is filled. So you should definitely use it.
 
-MailyGo also offers the option to use a list of spam words (see **`SPAMLIST`** on [Configuration](#user-content-configuration)). If any of the fields include a word from the list the submission will be marked as spam and an email will not be sent.
+MailyGo also offers the option to use a list of spam words (see **`SPAMLIST`** on [Configuration](#configuration)). If any of the fields include a word from the list the submission will be marked as spam and an email will not be sent.
 
 If a Google Safe Browsing API key is set, submitted URLs will also get checked for threats.
 
