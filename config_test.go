@@ -23,8 +23,8 @@ func Test_parseConfig(t *testing.T) {
 		if cfg.SmtpPort != 587 {
 			t.Error("SMTP Port not 587")
 		}
-		if len(cfg.Blacklist) != 2 || cfg.Blacklist[0] != "gambling" || cfg.Blacklist[1] != "casino" {
-			t.Error("Default Blacklist is wrong")
+		if len(cfg.Spamlist) != 2 || cfg.Spamlist[0] != "gambling" || cfg.Spamlist[1] != "casino" {
+			t.Error("Default Spamlist is wrong")
 		}
 	})
 	t.Run("Correct config parsing", func(t *testing.T) {
@@ -39,7 +39,7 @@ func Test_parseConfig(t *testing.T) {
 		_ = os.Setenv("SMTP_HOST", "smtp.example.com")
 		_ = os.Setenv("SMTP_PORT", "100")
 		_ = os.Setenv("GOOGLE_API_KEY", "abc")
-		_ = os.Setenv("BLACKLIST", "test,abc")
+		_ = os.Setenv("SPAMLIST", "test,abc")
 		cfg, err := parseConfig()
 		if err != nil {
 			t.Error()
@@ -75,8 +75,8 @@ func Test_parseConfig(t *testing.T) {
 		if !reflect.DeepEqual(cfg.GoogleApiKey, "abc") {
 			t.Error("Google API Key is wrong")
 		}
-		if !reflect.DeepEqual(cfg.Blacklist, []string{"test", "abc"}) {
-			t.Error("Blacklist is wrong")
+		if !reflect.DeepEqual(cfg.Spamlist, []string{"test", "abc"}) {
+			t.Error("Spamlist is wrong")
 		}
 	})
 	t.Run("Error when wrong config", func(t *testing.T) {
