@@ -22,13 +22,13 @@ func checkValues(values *FormValues) bool {
 			}
 		}
 	}
-	return checkBlacklist(allValues) || checkUrls(urlsToCheck)
+	return checkSpamlist(allValues) || checkUrls(urlsToCheck)
 }
 
-func checkBlacklist(values []string) bool {
+func checkSpamlist(values []string) bool {
 	for _, value := range values {
-		for _, blacklistedString := range appConfig.Blacklist {
-			if strings.Contains(strings.ToLower(value), strings.ToLower(blacklistedString)) {
+		for _, spamlistedString := range appConfig.Spamlist {
+			if strings.Contains(strings.ToLower(value), strings.ToLower(spamlistedString)) {
 				return true
 			}
 		}
