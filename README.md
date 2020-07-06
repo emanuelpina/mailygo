@@ -39,7 +39,7 @@ To run the server, you must set a few environment variables from the list below.
 
 ## Special form fields
 
-You can find a sample form in the `form.html` file. Only fields whose name do not start with an underscore (`_`) will be sent by email. Fields with an underscore serve as control fields for special purposes:
+You can find a sample form in the `form.html` file. Fields whose name do not start with an underscore (`_`) will be sent by email. Fields with an underscore serve as control fields for special purposes:
 
 | Name | Type | Default value | Usage |
 |---|---|---|---|
@@ -48,6 +48,14 @@ You can find a sample form in the `form.html` file. Only fields whose name do no
 | **`_redirectTo`** | optional | - | URL to redirect to, hidden |
 | **`_formName`** | optional | - | Name of the form, hidden |
 | **`_t_email`** | optional | - | (Default) "Honeypot" field, not hidden, advised (see notice below) |
+
+As I'm using MailyGo to handle a contact form and I want the fields Name, Subject and Message to be listed on the email in that particular order, I created specific names to handle those fields. **Its use is optional.** You can use all of them or just one. They will be list on the email just before the others fields.
+
+| Name | Type | Default value | Usage |
+|---|---|---|---|
+| **`_name`** | optional | - |Form submitter Name |
+| **`_subject`** | optional | - |Form submitter Subject |
+| **`_message`** | optional | - |Form submitter Message |
 
 ## Spam protection
 

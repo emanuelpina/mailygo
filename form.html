@@ -8,20 +8,28 @@
     		<input type="hidden" name="_to" value="test@example.com">
     		<input type="hidden" name="_formName" value="Test Form">
     		<input type="hidden" name="_redirectTo" value="https://example.com">
-				<label for="TEmail" style="display: none;">Test</label>
-				<input id="TEmail" type="email" name="_t_email" style="display: none;">
-				<label for="Email">Email</label>
+			<label for="TEmail" style="display: none;">Test</label>
+			<input id="TEmail" type="email" name="_t_email" style="display: none;">
+			<label for="Email">Email</label>
     		<br />
     		<input id="Email" type="email" name="_replyTo" required>
     		<br />
     		<label for="Name">Name</label>
     		<br />
-    		<input id="Name" type="text" name="Name" required>
+    		<input id="Name" type="text" name="_name" required>
+			<br />
+			<label for="Subject">Subject</label>
     		<br />
-				<label for="Message">Message</label>
-				<br />
-        <textarea id="Message" name="Message"></textarea>
-				<br />
+    		<input id="Subject" type="text" name="_subject" required>
+    		<br />
+			<label for="Message">Message</label>
+			<br />
+        	<textarea id="Message" name="_message"></textarea>
+			<br />
+			<label for="Website">Website</label>
+    		<br />
+    		<input id="Website" type="text" name="Website" required>
+    		<br />
     		<input type="submit" value="Send">
   		</form>
 	</body>

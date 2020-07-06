@@ -39,6 +39,18 @@ func buildMessage(recipient string, date time.Time, values *FormValues) string {
 		_, _ = fmt.Fprintln(msgBuffer)
 		_, _ = fmt.Fprintln(msgBuffer)
 	}
+	if name := findName(values); name != "" {
+		_, _ = fmt.Fprintf(msgBuffer, "Name: %s", name)
+		_, _ = fmt.Fprintln(msgBuffer)
+	}
+	if subject := findSubject(values); subject != "" {
+		_, _ = fmt.Fprintf(msgBuffer, "Subject: %s", subject)
+		_, _ = fmt.Fprintln(msgBuffer)
+	}
+	if message := findMessage(values); message != "" {
+		_, _ = fmt.Fprintf(msgBuffer, "Message:\r\n%s", message)
+		_, _ = fmt.Fprintln(msgBuffer)
+	}
 	bodyValues := removeMetaValues(values)
 	var keys []string
 	for key := range *bodyValues {
@@ -73,6 +85,18 @@ func buildSubmitterMessage(recipient string, date time.Time, values *FormValues)
 	if messageSubmitterHeader := appConfig.MessageSubmitterHeader; messageSubmitterHeader != "" {
 		_, _ = fmt.Fprintf(msgBuffer, "%s", messageSubmitterHeader)
 		_, _ = fmt.Fprintln(msgBuffer)
+		_, _ = fmt.Fprintln(msgBuffer)
+	}
+	if name := findName(values); name != "" {
+		_, _ = fmt.Fprintf(msgBuffer, "Name: %s", name)
+		_, _ = fmt.Fprintln(msgBuffer)
+	}
+	if subject := findSubject(values); subject != "" {
+		_, _ = fmt.Fprintf(msgBuffer, "Subject: %s", subject)
+		_, _ = fmt.Fprintln(msgBuffer)
+	}
+	if message := findMessage(values); message != "" {
+		_, _ = fmt.Fprintf(msgBuffer, "Message:\r\n%s", message)
 		_, _ = fmt.Fprintln(msgBuffer)
 	}
 	bodyValues := removeMetaValues(values)
@@ -123,6 +147,27 @@ func findFormName(values *FormValues) string {
 func findReplyTo(values *FormValues) string {
 	if len((*values)["_replyTo"]) == 1 && (*values)["_replyTo"][0] != "" {
 		return (*values)["_replyTo"][0]
+	}
+	return ""
+}
+
+func findName(values *FormValues) string {
+	if len((*values)["_name"]) == 1 && (*values)["_name"][0] != "" {
+		return (*values)["_name"][0]
+	}
+	return ""
+}
+
+func findSubject(values *FormValues) string {
+	if len((*values)["_subject"]) == 1 && (*values)["_subject"][0] != "" {
+		return (*values)["_subject"][0]
+	}
+	return ""
+}
+
+func findMessage(values *FormValues) string {
+	if len((*values)["_message"]) == 1 && (*values)["_message"][0] != "" {
+		return (*values)["_message"][0]
 	}
 	return ""
 }
