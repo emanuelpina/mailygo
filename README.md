@@ -49,7 +49,7 @@ You can find a sample form in the `form.html` file. Fields whose name do not sta
 | **`_formName`** | optional | - | Name of the form, hidden |
 | **`_t_email`** | optional | - | (Default) "Honeypot" field, not hidden, advised (see notice below) |
 
-As I'm using MailyGo to handle a contact form and I want the fields Name, Subject and Message to be listed on the email in that particular order, I created specific names to handle those fields. **Its use is optional.** You can use all of them or just one. They will be list on the email just before the others fields.
+As I'm using MailyGo to handle a contact form and I want the fields Name, Subject and Message to be listed on the email in that particular order, I created specific names to handle those fields. **Its use is optional.** You can use all of them or just one. They will be listed on the email just before the others fields.
 
 | Name | Type | Default value | Usage |
 |---|---|---|---|
