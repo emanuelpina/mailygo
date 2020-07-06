@@ -1,6 +1,6 @@
 # MailyGo
 
-MailyGo is a small tool written in Go that allows to send HTML forms, for example from static websites without a dynamic backend, via email. It can be used for contact forms on pages created with [Hugo](https://gohugo.io/) ([example](https://jlelse.dev/contact/)).
+MailyGo is a small tool written in Go that allows to send HTML forms, for example from static websites without a dynamic backend, via email. It can be used for contact forms on pages created with [Hugo](https://gohugo.io/) ([example](https://emanuelpina.pt/contact/)).
 
 MailyGo is lean and resource-saving. It can be installed with just one executable file.
 
