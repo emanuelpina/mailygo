@@ -5,16 +5,13 @@ steps:
   - name: publish
     image: plugins/docker
     settings:
-      username:
-        from_secret: docker_username
+      username: nologin
       password:
-        from_secret: docker_password
-      repo: quay.io/jlelse/mailygo
-      registry: quay.io
+        from_secret: registry_token
+      repo: rg.nl-ams.scw.cloud/emanuelpina/mailygo
+      registry: rg.nl-ams.scw.cloud
       tags: latest
-    when:
-      branch:
-        - master
-      event:
-        exclude:
-          - pull_request
+
+trigger:
+  branch:
+  - master

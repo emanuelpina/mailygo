@@ -1,4 +1,4 @@
-module git.jlel.se/jlelse/mailygo
+module codeberg.org/emanuelpina/mailygo
 
 go 1.14
 
