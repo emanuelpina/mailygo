@@ -18,6 +18,7 @@ type config struct {
 	SmtpPort               int      `env:"SMTP_PORT" envDefault:"587"`
 	GoogleApiKey           string   `env:"GOOGLE_API_KEY"`
 	Spamlist               []string `env:"SPAMLIST" envSeparator:"," envDefault:"gambling,casino"`
+	Token                  string   `env:"TOKEN"`
 	MessageHeader          string   `env:"MESSAGE_HEADER"`
 	MessageFooter          string   `env:"MESSAGE_FOOTER"`
 	MessageSubmitter       string   `env:"MESSAGE_SUBMITTER" envDefault:"false"`

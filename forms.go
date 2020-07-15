@@ -23,7 +23,7 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 	_ = r.ParseForm()
 	sanitizedForm := sanitizeForm(&r.PostForm)
 	go func() {
-		if !isBot(sanitizedForm) {
+		if checkToken(sanitizedForm) && !isBot(sanitizedForm) {
 			sendForm(sanitizedForm)
 		}
 	}()
@@ -42,6 +42,13 @@ func sanitizeForm(values *url.Values) *FormValues {
 		sanitizedForm[html.UnescapeString(p.Sanitize(key))] = sanitizedValues
 	}
 	return &sanitizedForm
+}
+
+func checkToken(values *FormValues) bool {
+	if token := appConfig.Token; token != "" && (*values)["_token"][0] != token {
+		return false
+	}
+	return true
 }
 
 func isBot(values *FormValues) bool {
