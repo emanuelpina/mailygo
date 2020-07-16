@@ -5,11 +5,12 @@ steps:
   - name: publish
     image: plugins/docker
     settings:
-      username: nologin
+      username: 
+        from_secret: registry_username
       password:
         from_secret: registry_token
-      repo: rg.nl-ams.scw.cloud/emanuelpina/mailygo
-      registry: rg.nl-ams.scw.cloud
+      repo: quay.io/emanuelpina/mailygo
+      registry: quay.io
       tags: latest
 
 trigger:
