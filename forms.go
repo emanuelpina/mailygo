@@ -23,7 +23,7 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 	_ = r.ParseForm()
 	sanitizedForm := sanitizeForm(&r.PostForm)
 	go func() {
-		if checkToken(sanitizedForm) && !isBot(sanitizedForm) {
+		if checkToken(sanitizedForm) && !findBotSubmit(sanitizedForm) && !isBot(sanitizedForm) {
 			sendForm(sanitizedForm)
 		}
 	}()
@@ -49,6 +49,13 @@ func checkToken(values *FormValues) bool {
 		return false
 	}
 	return true
+}
+
+func findBotSubmit(values *FormValues) bool {
+	if len((*values)["submit"]) == 1 {
+		return true
+	}
+	return false
 }
 
 func isBot(values *FormValues) bool {
