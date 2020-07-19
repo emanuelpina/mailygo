@@ -22,13 +22,24 @@ func checkValues(values *FormValues) bool {
 			}
 		}
 	}
-	return checkSpamlist(allValues) || checkUrls(urlsToCheck)
+	return checkSpamlist(allValues) || checkDenylist(values) || checkUrls(urlsToCheck)
 }
 
 func checkSpamlist(values []string) bool {
 	for _, value := range values {
 		for _, spamlistedString := range appConfig.Spamlist {
 			if strings.Contains(strings.ToLower(value), strings.ToLower(spamlistedString)) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func checkDenylist(values *FormValues) bool {
+	for key := range *values {
+		for _, denylistedString := range appConfig.Denylist {
+			if strings.Contains(strings.ToLower(key), strings.ToLower(denylistedString)) {
 				return true
 			}
 		}
