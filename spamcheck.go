@@ -39,7 +39,7 @@ func checkSpamlist(values []string) bool {
 func checkDenylist(values *FormValues) bool {
 	for key := range *values {
 		for _, denylistedString := range appConfig.Denylist {
-			if strings.Contains(strings.ToLower(key), strings.ToLower(denylistedString)) {
+			if strings.ToLower(key) == strings.ToLower(denylistedString) {
 				return true
 			}
 		}
