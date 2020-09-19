@@ -6,9 +6,9 @@ steps:
     image: plugins/docker
     settings:
       username: 
-        from_secret: registry_username
+        from_secret: docker_username
       password:
-        from_secret: registry_token
+        from_secret: docker_password
       repo: quay.io/emanuelpina/mailygo
       registry: quay.io
       tags: latest
