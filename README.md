@@ -1,4 +1,5 @@
 # MailyGo
+[![Build Status](https://drone.mnlpn.xyz/api/badges/emanuelpina/mailygo/status.svg)](https://drone.mnlpn.xyz/emanuelpina/mailygo) [![Docker Repository on Quay](https://quay.io/repository/emanuelpina/mailygo/status "Docker Repository on Quay")](https://quay.io/repository/emanuelpina/mailygo)
 
 MailyGo is a small tool written in Go that allows to send HTML forms, for example from static websites without a dynamic backend, via email. It can be used for contact forms on pages created with [Hugo](https://gohugo.io/) ([example](https://emanuelpina.pt/contact/)).
 
