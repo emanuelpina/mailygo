@@ -8,5 +8,5 @@ require (
 	github.com/google/safebrowsing v0.0.0-20190624211811-bbf0d20d26b3
 	github.com/microcosm-cc/bluemonday v1.0.16
 	golang.org/x/net v0.17.0 // indirect
-	google.golang.org/protobuf v1.27.1 // indirect
+	google.golang.org/protobuf v1.33.0 // indirect
 )
